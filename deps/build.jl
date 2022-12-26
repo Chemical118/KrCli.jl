@@ -1,0 +1,1 @@
+using KrCli; KrCli.comonicon_install()

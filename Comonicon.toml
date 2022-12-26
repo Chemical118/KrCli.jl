@@ -1,0 +1,10 @@
+name = "krcli"
+
+[install]
+completion = true
+quiet = false
+optimize = 2
+
+[sysimg]
+incremental=false
+filter_stdlibs=true

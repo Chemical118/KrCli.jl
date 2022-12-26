@@ -1,0 +1,35 @@
+name: Update ghcr.io image
+
+on: [push]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+    steps:
+      - uses: actions/checkout@v3
+      - name: Login ghcr.io
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install docker image
+        run: docker pull julia:latest
+
+      - name: Install KrCli.jl module and requirements
+        run: |
+          docker run -i --name KrCli julia:latest
+          docker container start KrCli
+          docker exec KrCli julia -e 'import Pkg; Pkg.add(url="https://github.com/Chemical118/KrCli.jl"); Pkg.build('KrCli');'
+          docker exec echo -e "\nexport PATH=\$PATH:/root/.julia/bin" >> /root/.bashrc
+
+      - name: Update image with new docker container
+        run: |
+          docker stop KrCli -t 0
+          docker commit -a "Hyunwoo Ryu" -m "${{ github.event.head_commit.message }} KrCli.jl update" KrCli ghcr.io/chemical118/krcli:latest
+      
+      - name: Push updated image
+        run: docker push ghcr.io/chemical118/krcli:latest
