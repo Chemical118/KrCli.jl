@@ -23,7 +23,7 @@ jobs:
         run: |
           docker run -i --name KrCli julia:latest
           docker container start KrCli
-          docker exec KrCli echo -e "\nexport PATH=\$PATH:/root/.julia/bin" | sudo tee -a /root/.bashrc
+          docker exec KrCli echo -e "\nexport PATH=\$PATH:/root/.julia/bin" | tee -a /root/.bashrc
 
       - name: Update image with new docker container
         run: |
