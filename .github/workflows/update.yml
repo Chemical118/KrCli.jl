@@ -23,6 +23,8 @@ jobs:
         run: |
           docker run -i --name KrCli julia:latest
           docker container start KrCli
+          docker exec apt -y update
+          docker exec apt install -y g++
           docker exec KrCli julia -e 'import Pkg; Pkg.add(url="https://github.com/Chemical118/KrCli.jl"); using KrCli; KrCli.comonicon_install();'
           docker exec echo -e "\nexport PATH=\$PATH:/root/.julia/bin" >> /root/.bashrc
 
