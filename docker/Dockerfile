@@ -7,6 +7,6 @@ RUN \
 
 ENV PATH=$PATH:/root/.julia/bin
 
-COPY docker-entrypoint.sh /usr/local/bin/
+COPY --chmod=777 docker-entrypoint.sh /usr/local/bin/
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD []
