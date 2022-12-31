@@ -1,8 +1,8 @@
 FROM julia:latest
 
 RUN \
-    apt update && \
-    apt install -y clang && \
+    apt-get update && \
+    apt-get install -y clang && \
     julia -e 'import Pkg; Pkg.add(url="https://github.com/Chemical118/KrCli.jl");'
 
 ENV PATH=$PATH:/root/.julia/bin
