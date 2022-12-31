@@ -3,7 +3,7 @@ module KrCli
 using Comonicon
 
 """
-test function for number of threads
+test for number of threads
 """
 @cast function test()
     println(Threads.nthreads())
