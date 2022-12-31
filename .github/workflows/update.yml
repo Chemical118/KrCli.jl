@@ -5,7 +5,7 @@ on: [push]
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    if: ${{ !startsWith(github.event.head_commit.message, 'v') }}
+    if: ${{ startsWith(github.event.head_commit.message, 'v') }}
     permissions:
       packages: write
     steps:
