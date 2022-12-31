@@ -9,4 +9,4 @@ ENV PATH=$PATH:/root/.julia/bin
 
 COPY --chmod=777 docker-entrypoint.sh /usr/local/bin/
 ENTRYPOINT ["docker-entrypoint.sh"]
-CMD []
+CMD ["krcli"]
