@@ -8,4 +8,3 @@ optimize = 2
 [sysimg]
 incremental = false
 filter_stdlibs = true
-cpu_target = "generic"
